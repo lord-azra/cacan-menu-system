@@ -1,5 +1,4 @@
-let cart = JSON.parse(localStorage.getItem("cart")) || [];
-let cart = JSON.parse(localStorage.getItem("cart")) || [];
+let cart = JSON.parse(localStorage.getItem("cart")) || []; 
 let cart = [];
 
 async function init() {
