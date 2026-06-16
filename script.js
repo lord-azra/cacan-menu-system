@@ -1,3 +1,4 @@
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
 let cart = [];
 
 async function init() {
@@ -109,3 +110,4 @@ function renderCart() {
 }
 
 init();
+localStorage.setItem("cart", JSON.stringify(cart));
