@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="tr">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,84 +11,39 @@
 <body>
 
     <!-- HEADER -->
-
-    <header class="header">
-
-        <h1 class="logo">
-            🍔 ÇAÇAN KÖFTE & KUMRU
-        </h1>
-
-        <p class="subtitle">
-            Lezzetin Adresi
-        </p>
-
+    <header>
+        <h1>ÇAÇAN KÖFTE & KUMRU</h1>
     </header>
 
-    <!-- ARAMA -->
-
-    <section class="search-section">
-
-        <input
-            type="text"
-            id="searchInput"
-            placeholder="Ürün ara..."
-        >
-
-    </section>
-
-    <!-- KATEGORİLER -->
-
+    <!-- NAV -->
     <nav id="category-nav"></nav>
 
+    <!-- ARAMA -->
+    <input id="searchInput" type="text" placeholder="Ürün ara..." />
+
     <!-- MENÜ -->
-
     <main id="menu-container">
-
-        <p class="loading">
-            Menü yükleniyor...
-        </p>
-
+        <p>Menü yükleniyor...</p>
     </main>
 
-    <!-- SABİT SEPET -->
-
-    <aside id="cart-panel">
-
-        <div class="cart-header">
-
-            <span>🛒 Sepet</span>
-
-            <span id="cart-count">
-                0 Ürün
-            </span>
-
-        </div>
+    <!-- SEPET PANELİ -->
+    <div id="cart-panel">
+        <h3>Sepet</h3>
 
         <div id="cart-items"></div>
 
-        <div class="cart-total">
+        <p id="cart-count">0 Ürün</p>
+        <p id="total-price">0 ₺</p>
 
-            Toplam:
-            <span id="total-price">
-                0 ₺
-            </span>
+        <input id="tableNo" type="number" placeholder="Masa No" />
 
-        </div>
-
-        <input
-            type="number"
-            id="table-number"
-            placeholder="Masa No"
-        >
-
-        <button id="send-order-btn">
+        <button onclick="sendWhatsApp()">
             Siparişi Gönder
         </button>
+    </div>
 
-    </aside>
-
+    <!-- JS -->
     <script src="script.js"></script>
 
 </body>
-
 </html>
