@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="tr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,38 +8,72 @@
 
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-    <!-- ÜST ALAN -->
-    <header>
-        <h1 id="restaurant-name">ÇAÇAN KÖFTE & KUMRU</h1>
+    <!-- HEADER -->
+
+    <header class="header">
+
+        <h1 class="logo">
+            🍔 ÇAÇAN KÖFTE & KUMRU
+        </h1>
+
+        <p class="subtitle">
+            Lezzetin Adresi
+        </p>
+
     </header>
 
     <!-- ARAMA -->
-    <section id="search-section">
+
+    <section class="search-section">
+
         <input
             type="text"
             id="searchInput"
             placeholder="Ürün ara..."
         >
+
     </section>
 
     <!-- KATEGORİLER -->
+
     <nav id="category-nav"></nav>
 
     <!-- MENÜ -->
+
     <main id="menu-container">
-        <p id="loading-message">Menü yükleniyor...</p>
+
+        <p class="loading">
+            Menü yükleniyor...
+        </p>
+
     </main>
 
-    <!-- SEPET -->
+    <!-- SABİT SEPET -->
+
     <aside id="cart-panel">
-        <h2>Sepet</h2>
+
+        <div class="cart-header">
+
+            <span>🛒 Sepet</span>
+
+            <span id="cart-count">
+                0 Ürün
+            </span>
+
+        </div>
 
         <div id="cart-items"></div>
 
-        <div id="cart-total">
-            Toplam: <span id="total-price">0 ₺</span>
+        <div class="cart-total">
+
+            Toplam:
+            <span id="total-price">
+                0 ₺
+            </span>
+
         </div>
 
         <input
@@ -50,58 +85,11 @@
         <button id="send-order-btn">
             Siparişi Gönder
         </button>
+
     </aside>
-
-    <!-- GİRİŞ MODAL -->
-    <div id="login-modal" class="hidden">
-
-        <div class="modal-content">
-
-            <h2>Personel Girişi</h2>
-
-            <input
-                type="text"
-                id="username"
-                placeholder="Kullanıcı Adı"
-            >
-
-            <input
-                type="password"
-                id="password"
-                placeholder="Şifre"
-            >
-
-            <button id="login-btn">
-                Giriş Yap
-            </button>
-
-        </div>
-
-    </div>
-
-    <!-- GARSON PANELİ -->
-    <section id="waiter-panel" class="hidden">
-        <h2>Garson Paneli</h2>
-
-        <div id="active-orders"></div>
-
-        <div id="stock-status"></div>
-    </section>
-
-    <!-- PATRON PANELİ -->
-    <section id="admin-panel" class="hidden">
-
-        <h2>Patron Paneli</h2>
-
-        <div id="daily-report"></div>
-
-        <div id="sales-report"></div>
-
-        <div id="stock-management"></div>
-
-    </section>
 
     <script src="script.js"></script>
 
 </body>
+
 </html>
