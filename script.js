@@ -1,4 +1,5 @@
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
 let cart = [];
 
 async function init() {
@@ -131,9 +132,10 @@ function sendWhatsApp() {
 
     message += `\nTOPLAM: ${total} ₺`;
 
-    const phone = "90XXXXXXXXXX"; // BURAYA işletme numarası
+    const phone = "905316753924"; // BURAYA işletme numarası
 
     const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
 
     window.open(url, "_blank");
 }
+localStorage.setItem("cart", JSON.stringify(cart));
