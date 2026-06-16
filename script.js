@@ -111,3 +111,29 @@ function renderCart() {
 
 init();
 localStorage.setItem("cart", JSON.stringify(cart));
+function sendWhatsApp() {
+
+    const table = document.getElementById("tableNo").value;
+
+    if (!table) {
+        alert("Masa numarası gir!");
+        return;
+    }
+
+    let message = `🍽️ SİPARİŞ\nMasa: ${table}\n\n`;
+
+    let total = 0;
+
+    cart.forEach(item => {
+        message += `- ${item.name} x${item.qty} = ${item.price * item.qty} ₺\n`;
+        total += item.price * item.qty;
+    });
+
+    message += `\nTOPLAM: ${total} ₺`;
+
+    const phone = "90XXXXXXXXXX"; // BURAYA işletme numarası
+
+    const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+
+    window.open(url, "_blank");
+}
