@@ -1,4 +1,4 @@
-/* GENEL */
+/* RESET */
 
 * {
     margin: 0;
@@ -6,85 +6,101 @@
     box-sizing: border-box;
 }
 
-html {
-    scroll-behavior: smooth;
-}
+/* GENEL */
 
 body {
     font-family: Arial, sans-serif;
-    background: #111;
-    color: #fff;
+    background: #F5E6C8;
+    color: #3B2A1A;
     min-height: 100vh;
 }
 
 /* HEADER */
 
-header {
+.header {
     text-align: center;
-    padding: 20px;
-    border-bottom: 1px solid #333;
+    padding: 25px 15px;
+    background: #8B5A2B;
+    color: white;
+    box-shadow: 0 2px 10px rgba(0,0,0,.15);
 }
 
-#restaurant-name {
-    color: #ffcc00;
+.logo {
+    font-size: 28px;
+}
+
+.subtitle {
+    margin-top: 8px;
+    opacity: .9;
 }
 
 /* ARAMA */
 
-#search-section {
+.search-section {
     padding: 15px;
 }
 
 #searchInput {
     width: 100%;
-    padding: 12px;
-    border: none;
-    border-radius: 8px;
+    padding: 14px;
+    border: 2px solid #D9C3A3;
+    border-radius: 12px;
     font-size: 16px;
+    background: #FFF8E7;
 }
 
-/* NAVIGATION */
+/* KATEGORİ NAV */
 
 #category-nav {
     display: flex;
     gap: 10px;
     overflow-x: auto;
-    padding: 10px;
+
+    padding: 12px;
+
     position: sticky;
     top: 0;
-    background: #111;
-    border-bottom: 1px solid #333;
+
+    background: #FFF8E7;
+
+    border-bottom: 1px solid #D9C3A3;
+
     z-index: 100;
 }
 
 #category-nav a {
-    color: #aaa;
     text-decoration: none;
-    border: 1px solid #333;
+
+    color: #6B4226;
+
+    background: white;
+
+    border: 1px solid #D9C3A3;
+
+    border-radius: 25px;
+
     padding: 8px 14px;
-    border-radius: 20px;
+
     white-space: nowrap;
+
+    transition: .2s;
 }
 
 #category-nav a.active {
-    background: #ffcc00;
-    color: #000;
-    border-color: #ffcc00;
+    background: #D97706;
+    color: white;
 }
 
 /* MENÜ */
 
 #menu-container {
-    padding: 20px;
-}
-
-section {
-    margin-bottom: 40px;
+    padding: 15px;
+    padding-bottom: 320px;
 }
 
 .category-title {
-    color: #ffcc00;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
+    color: #6B4226;
 }
 
 .product-card {
@@ -92,30 +108,40 @@ section {
     justify-content: space-between;
     align-items: center;
 
-    padding: 15px 0;
+    background: white;
 
-    border-bottom: 1px solid #222;
+    padding: 15px;
+
+    margin-bottom: 10px;
+
+    border-radius: 12px;
+
+    box-shadow: 0 2px 6px rgba(0,0,0,.08);
 }
 
 .product-name {
-    font-size: 16px;
+    font-weight: bold;
 }
 
 .price {
+    color: #D97706;
     font-weight: bold;
 }
 
 .tag {
     display: inline-block;
+
     margin-top: 5px;
-    padding: 3px 8px;
 
-    background: #ffcc00;
-    color: #000;
+    background: #D97706;
 
-    border-radius: 4px;
+    color: white;
+
     font-size: 11px;
-    font-weight: bold;
+
+    padding: 4px 8px;
+
+    border-radius: 8px;
 }
 
 /* SEPET */
@@ -123,34 +149,49 @@ section {
 #cart-panel {
     position: fixed;
 
-    bottom: 0;
     left: 0;
     right: 0;
+    bottom: 0;
 
-    background: #1a1a1a;
+    background: white;
 
     padding: 15px;
 
-    border-top: 1px solid #333;
+    border-top: 2px solid #D9C3A3;
+
+    box-shadow: 0 -4px 12px rgba(0,0,0,.12);
+}
+
+.cart-header {
+    display: flex;
+    justify-content: space-between;
+
+    margin-bottom: 10px;
+
+    font-weight: bold;
 }
 
 #cart-items {
-    max-height: 150px;
+    max-height: 120px;
     overflow-y: auto;
 }
 
-#cart-total {
+.cart-total {
     margin-top: 10px;
+    font-size: 18px;
     font-weight: bold;
 }
 
 #table-number {
     width: 100%;
-    margin-top: 10px;
-    padding: 10px;
 
-    border: none;
-    border-radius: 8px;
+    padding: 12px;
+
+    margin-top: 10px;
+
+    border: 1px solid #D9C3A3;
+
+    border-radius: 10px;
 }
 
 #send-order-btn {
@@ -158,72 +199,24 @@ section {
 
     margin-top: 10px;
 
-    padding: 12px;
+    padding: 14px;
+
+    border: none;
+
+    border-radius: 10px;
 
     background: #25D366;
 
     color: white;
 
-    border: none;
-    border-radius: 8px;
+    font-size: 16px;
+
+    font-weight: bold;
 
     cursor: pointer;
 }
 
-/* MODAL */
-
-.hidden {
-    display: none;
-}
-
-#login-modal {
-    position: fixed;
-    inset: 0;
-
-    background: rgba(0,0,0,0.8);
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.modal-content {
-    background: #222;
-
-    padding: 20px;
-
-    border-radius: 12px;
-
-    width: 90%;
-    max-width: 400px;
-}
-
-.modal-content input {
-    width: 100%;
-
-    margin-top: 10px;
-
-    padding: 10px;
-}
-
-/* GARSON PANELİ */
-
-#waiter-panel {
-    padding: 20px;
-}
-
-/* PATRON PANELİ */
-
-#admin-panel {
-    padding: 20px;
-}
-
-/* MOBİL */
-
-@media (max-width: 768px) {
-
-    #menu-container {
-        padding-bottom: 250px;
-    }
-
+.loading {
+    text-align: center;
+    margin-top: 50px;
 }
