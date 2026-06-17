@@ -1,400 +1,218 @@
-
 {
-  "restaurantInfo": {
-    "name": "ÇAÇAN KÖFTE & KUMRU",
-    "currency": "₺"
-  },
+"categories": [
+{
+"id": "kofte",
+"title": "Köfteler",
+"items": [
+{
+"sku": "K001",
+"name": "Kasap Köfte",
+"price": 220,
+"tag": "En Çok Satan"
+},
+{
+"sku": "K002",
+"name": "Kaşarlı Köfte",
+"price": 240
+},
+{
+"sku": "K003",
+"name": "Acılı Köfte",
+"price": 230
+},
+{
+"sku": "K004",
+"name": "Porsiyon Köfte",
+"price": 260
+}
+]
+},
 
-  "categories": [
+```
+{
+  "id": "kumru",
+  "title": "Kumrular",
+  "items": [
     {
-      "id": "kofte",
-      "title": "Köfte Çeşitleri",
-      "icon": "🥩",
-      "order": 1,
-      "items": [
-        {
-          "sku": "KOF001",
-          "name": "Porsiyon Kasap Köfte",
-          "desc": "Geleneksel kasap köfte",
-          "price": 150,
-          "stock": 50,
-          "available": true,
-          "tag": "POPÜLER",
-          "image": ""
-        },
-        {
-          "sku": "KOF002",
-          "name": "Karışık Köfte",
-          "desc": "Kasap + baharatlı köfte karışık",
-          "price": 160,
-          "stock": 50,
-          "available": true,
-          "image": ""
-        },
-        {
-          "sku": "KOF003",
-          "name": "Kaşarlı Köfte",
-          "desc": "İçinde erimiş kaşar",
-          "price": 170,
-          "stock": 50,
-          "available": true,
-          "image": ""
-        },
-        {
-          "sku": "KOF004",
-          "name": "Patatesli Köfte",
-          "desc": "Köfte + patates",
-          "price": 140,
-          "stock": 50,
-          "available": true,
-          "image": ""
-        }
-      ]
+      "sku": "KU001",
+      "name": "Karışık Kumru",
+      "price": 190
     },
-
     {
-      "id": "hamburger",
-      "title": "Hamburger Serisi",
-      "icon": "🍔",
-      "order": 2,
-      "items": [
-        {
-          "sku": "HAM001",
-          "name": "Hamburger Menü",
-          "desc": "Patates + içecek dahil",
-          "price": 200,
-          "stock": 50,
-          "available": true,
-          "image": ""
-        },
-        {
-          "sku": "HAM002",
-          "name": "Burger (Tek)",
-          "desc": "Sade burger",
-          "price": 150,
-          "stock": 50,
-          "available": true,
-          "image": ""
-        },
-        {
-          "sku": "HAM003",
-          "name": "Çift Burger",
-          "desc": "Double et burger",
-          "price": 220,
-          "stock": 50,
-          "available": true,
-          "image": ""
-        },
-        {
-          "sku": "HAM004",
-          "name": "Çift Burger Menü",
-          "desc": "Double + patates + içecek",
-          "price": 270,
-          "stock": 50,
-          "available": true,
-          "image": ""
-        }
-      ]
+      "sku": "KU002",
+      "name": "Sucuklu Kumru",
+      "price": 180
     },
-
     {
-      "id": "kumru",
-      "title": "İzmir Kumru Çeşitleri",
-      "icon": "🥪",
-      "order": 3,
-      "items": [
-        {
-          "sku": "KUM001",
-          "name": "Sade Kumru",
-          "desc": "Klasik kumru",
-          "price": 90,
-          "stock": 50,
-          "available": true,
-          "tag": "ŞEFİN SEÇİMİ",
-          "image": ""
-        },
-        {
-          "sku": "KUM002",
-          "name": "Patatesli Kumru",
-          "desc": "Patates eklenmiş",
-          "price": 100,
-          "stock": 50,
-          "available": true,
-          "image": ""
-        },
-        {
-          "sku": "KUM003",
-          "name": "Yumurtalı Kumru",
-          "desc": "Yumurtalı özel",
-          "price": 110,
-          "stock": 50,
-          "available": true,
-          "image": ""
-        },
-        {
-          "sku": "KUM004",
-          "name": "Köfteli Kumru",
-          "desc": "Köfte eklenmiş kumru",
-          "price": 130,
-          "stock": 50,
-          "available": true,
-          "image": ""
-        },
-        {
-          "sku": "KUM005",
-          "name": "Nuggetlı Kumru",
-          "desc": "Nuggetlı versiyon",
-          "price": 120,
-          "stock": 50,
-          "available": true,
-          "image": ""
-        },
-        {
-          "sku": "KUM006",
-          "name": "Atom Kumru",
-          "desc": "Karışık ekstra dolu",
-          "price": 150,
-          "stock": 50,
-          "available": true,
-          "image": ""
-        }
-      ]
+      "sku": "KU003",
+      "name": "Kaşarlı Kumru",
+      "price": 170
     },
-
     {
-      "id": "patso",
-      "title": "Çıtır Patso Çeşitleri",
-      "icon": "🍟",
-      "order": 4,
-      "items": [
-        {
-          "sku": "PAT001",
-          "name": "Sade Patso",
-          "price": 70,
-          "stock": 50,
-          "available": true,
-          "image": ""
-        },
-        {
-          "sku": "PAT002",
-          "name": "Nuggetlı Patso",
-          "price": 90,
-          "stock": 50,
-          "available": true,
-          "image": ""
-        },
-        {
-          "sku": "PAT003",
-          "name": "Sosisli Patso",
-          "price": 85,
-          "stock": 50,
-          "available": true,
-          "image": ""
-        },
-        {
-          "sku": "PAT004",
-          "name": "Sucuklu Patso",
-          "price": 95,
-          "stock": 50,
-          "available": true,
-          "image": ""
-        },
-        {
-          "sku": "PAT005",
-          "name": "Porsiyon Patates",
-          "price": 60,
-          "stock": 50,
-          "available": true,
-          "image": ""
-        }
-      ]
-    },
-
-    {
-      "id": "tost",
-      "title": "Büfe Tostları",
-      "icon": "🥪",
-      "order": 5,
-      "items": [
-        {
-          "sku": "TOS001",
-          "name": "Karışık Tost",
-          "price": 80,
-          "stock": 50,
-          "available": true,
-          "image": ""
-        },
-        {
-          "sku": "TOS002",
-          "name": "Kaşarlı Tost",
-          "price": 70,
-          "stock": 50,
-          "available": true,
-          "image": ""
-        },
-        {
-          "sku": "TOS003",
-          "name": "Atom Tost",
-          "price": 110,
-          "stock": 50,
-          "available": true,
-          "image": ""
-        },
-        {
-          "sku": "TOS004",
-          "name": "Mega Tost",
-          "price": 120,
-          "stock": 50,
-          "available": true,
-          "image": ""
-        },
-        {
-          "sku": "TOS005",
-          "name": "Domatesli Tost",
-          "price": 60,
-          "stock": 50,
-          "available": true,
-          "image": ""
-        },
-        {
-          "sku": "TOS006",
-          "name": "Yumurtalı Tost",
-          "price": 75,
-          "stock": 50,
-          "available": true,
-          "image": ""
-        },
-        {
-          "sku": "TOS007",
-          "name": "Patatesli Tost",
-          "price": 75,
-          "stock": 50,
-          "available": true,
-          "image": ""
-        },
-        {
-          "sku": "TOS008",
-          "name": "Köfteli Tost",
-          "price": 100,
-          "stock": 50,
-          "available": true,
-          "image": ""
-        }
-      ]
-    },
-
-    {
-      "id": "tavuk",
-      "title": "Tavuk & Pilav Serisi",
-      "icon": "🍗",
-      "order": 6,
-      "items": [
-        {
-          "sku": "TAV001",
-          "name": "1 Porsiyon Tavuk Pilav",
-          "price": 120,
-          "stock": 50,
-          "available": true,
-          "image": ""
-        },
-        {
-          "sku": "TAV002",
-          "name": "1.5 Porsiyon Tavuk Pilav",
-          "price": 160,
-          "stock": 50,
-          "available": true,
-          "image": ""
-        },
-        {
-          "sku": "TAV003",
-          "name": "Tavuk Pilav + Köfte",
-          "price": 180,
-          "stock": 50,
-          "available": true,
-          "image": ""
-        },
-        {
-          "sku": "TAV004",
-          "name": "Sade Pilav",
-          "price": 60,
-          "stock": 50,
-          "available": true,
-          "image": ""
-        },
-        {
-          "sku": "TAV005",
-          "name": "Sade Tavuk",
-          "price": 100,
-          "stock": 50,
-          "available": true,
-          "image": ""
-        }
-      ]
-    },
-
-    {
-      "id": "icecek",
-      "title": "Soğuk İçecekler",
-      "icon": "🥤",
-      "order": 7,
-      "items": [
-        {
-          "sku": "ICE001",
-          "name": "Şişe Coca-Cola",
-          "price": 40,
-          "stock": 100,
-          "available": true,
-          "image": ""
-        },
-        {
-          "sku": "ICE002",
-          "name": "Şişe Fanta",
-          "price": 40,
-          "stock": 100,
-          "available": true,
-          "image": ""
-        },
-        {
-          "sku": "ICE003",
-          "name": "Kutu Coca-Cola",
-          "price": 35,
-          "stock": 100,
-          "available": true,
-          "image": ""
-        },
-        {
-          "sku": "ICE004",
-          "name": "Kutu Fanta",
-          "price": 35,
-          "stock": 100,
-          "available": true,
-          "image": ""
-        },
-        {
-          "sku": "ICE005",
-          "name": "Ayran",
-          "price": 20,
-          "stock": 100,
-          "available": true,
-          "image": ""
-        },
-        {
-          "sku": "ICE006",
-          "name": "Soda",
-          "price": 20,
-          "stock": 100,
-          "available": true,
-          "image": ""
-        },
-        {
-          "sku": "ICE007",
-          "name": "Su",
-          "price": 10,
-          "stock": 100,
-          "available": true,
-          "image": ""
-        }
-      ]
+      "sku": "KU004",
+      "name": "Özel Kumru",
+      "price": 220
     }
   ]
+},
+
+{
+  "id": "hamburger",
+  "title": "Hamburgerler",
+  "items": [
+    {
+      "sku": "H001",
+      "name": "Hamburger",
+      "price": 180
+    },
+    {
+      "sku": "H002",
+      "name": "Cheeseburger",
+      "price": 200
+    },
+    {
+      "sku": "H003",
+      "name": "Double Burger",
+      "price": 260
+    },
+    {
+      "sku": "H004",
+      "name": "Mega Burger",
+      "price": 320
+    }
+  ]
+},
+
+{
+  "id": "tost",
+  "title": "Tostlar",
+  "items": [
+    {
+      "sku": "T001",
+      "name": "Kaşarlı Tost",
+      "price": 110
+    },
+    {
+      "sku": "T002",
+      "name": "Karışık Tost",
+      "price": 130
+    },
+    {
+      "sku": "T003",
+      "name": "Sucuklu Tost",
+      "price": 140
+    }
+  ]
+},
+
+{
+  "id": "tavuk",
+  "title": "Tavuk Ürünleri",
+  "items": [
+    {
+      "sku": "TV001",
+      "name": "Tavuk Şiş",
+      "price": 220
+    },
+    {
+      "sku": "TV002",
+      "name": "Tavuk Döner",
+      "price": 180
+    },
+    {
+      "sku": "TV003",
+      "name": "Tavuk Izgara",
+      "price": 240
+    }
+  ]
+},
+
+{
+  "id": "pilav",
+  "title": "Pilavlar",
+  "items": [
+    {
+      "sku": "P001",
+      "name": "Tavuklu Pilav",
+      "price": 140
+    },
+    {
+      "sku": "P002",
+      "name": "Nohutlu Pilav",
+      "price": 120
+    },
+    {
+      "sku": "P003",
+      "name": "Pilav Üstü Tavuk",
+      "price": 170
+    }
+  ]
+},
+
+{
+  "id": "patso",
+  "title": "Patso",
+  "items": [
+    {
+      "sku": "PA001",
+      "name": "Patso",
+      "price": 110
+    },
+    {
+      "sku": "PA002",
+      "name": "Kaşarlı Patso",
+      "price": 130
+    },
+    {
+      "sku": "PA003",
+      "name": "Sucuklu Patso",
+      "price": 140
+    }
+  ]
+},
+
+{
+  "id": "icecek",
+  "title": "İçecekler",
+  "items": [
+    {
+      "sku": "I001",
+      "name": "Kola",
+      "price": 50
+    },
+    {
+      "sku": "I002",
+      "name": "Fanta",
+      "price": 50
+    },
+    {
+      "sku": "I003",
+      "name": "Sprite",
+      "price": 50
+    },
+    {
+      "sku": "I004",
+      "name": "Ayran",
+      "price": 35
+    },
+    {
+      "sku": "I005",
+      "name": "Şalgam",
+      "price": 40
+    },
+    {
+      "sku": "I006",
+      "name": "Su",
+      "price": 15
+    },
+    {
+      "sku": "I007",
+      "name": "Çay",
+      "price": 20
+    }
+  ]
+}
+```
+
+]
 }
