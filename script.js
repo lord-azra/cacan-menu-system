@@ -3,298 +3,159 @@ let menuData = null;
 
 async function init() {
 
-```
-try {
+    try {
 
-    const res = await fetch("./data/menu.json");
-    menuData = await res.json();
+        const res = await fetch("./data/menu.json");
+        menuData = await res.json();
 
-    renderMenu(menuData.categories);
-    renderCart();
+        renderMenu(menuData.categories);
+        renderCart();
 
-    document.getElementById("searchInput")
-        .addEventListener("input", searchProducts);
+        document.getElementById("searchInput")
+            .addEventListener("input", searchProducts);
 
-} catch (err) {
-    console.error(err);
-
-    document.getElementById("menu-container").innerHTML =
-        "<p>Menü yüklenemedi.</p>";
-}
-```
-
+    } catch (err) {
+        console.error(err);
+        document.getElementById("menu-container")
+            .innerHTML = "Menü yüklenemedi";
+    }
 }
 
 function renderMenu(categories) {
 
-```
-const container = document.getElementById("menu-container");
-const nav = document.getElementById("category-nav");
+    const container = document.getElementById("menu-container");
+    const nav = document.getElementById("category-nav");
 
-container.innerHTML = "";
-nav.innerHTML = "";
+    container.innerHTML = "";
+    nav.innerHTML = "";
 
-categories.forEach(cat => {
+    categories.forEach(cat => {
 
-    const link = document.createElement("a");
+        const link = document.createElement("a");
+        link.href = "#" + cat.id;
+        link.textContent = cat.title;
+        nav.appendChild(link);
 
-    link.href = "#" + cat.id;
-    link.textContent = cat.title;
+        const section = document.createElement("section");
+        section.id = cat.id;
 
-    nav.appendChild(link);
+        cat.items.forEach(item => {
 
-    const section = document.createElement("section");
+            const div = document.createElement("div");
+            div.className = "product-card";
 
-    section.id = cat.id;
+            div.innerHTML = `
+                <div>${item.name}</div>
+                <div>${item.price} ₺</div>
+            `;
 
-    section.innerHTML =
-        `<h2>${cat.title}</h2>`;
+            div.onclick = () => addToCart(item);
 
-    cat.items.forEach(item => {
+            section.appendChild(div);
+        });
 
-        const card = document.createElement("div");
-
-        card.className = "product-card";
-
-        card.innerHTML = `
-            <div>
-                <div class="product-name">
-                    ${item.name}
-                </div>
-
-                ${item.tag ?
-                    `<span class="tag">${item.tag}</span>`
-                    : ""
-                }
-            </div>
-
-            <div class="price">
-                ${item.price} ₺
-            </div>
-        `;
-
-        card.onclick = () => addToCart(item);
-
-        section.appendChild(card);
+        container.appendChild(section);
     });
-
-    container.appendChild(section);
-});
-```
-
 }
 
 function searchProducts() {
 
-```
-const text =
-    document.getElementById("searchInput")
-    .value
-    .toLowerCase();
+    const text = document.getElementById("searchInput").value.toLowerCase();
 
-const filtered = {
-    categories: menuData.categories.map(cat => ({
+    const filtered = menuData.categories.map(cat => ({
         ...cat,
-        items: cat.items.filter(item =>
-            item.name.toLowerCase().includes(text)
+        items: cat.items.filter(i =>
+            i.name.toLowerCase().includes(text)
         )
-    }))
-};
+    }));
 
-renderMenu(filtered.categories);
-```
-
+    renderMenu(filtered);
 }
 
 function addToCart(item) {
 
-```
-const found =
-    cart.find(x => x.sku === item.sku);
+    let found = cart.find(x => x.sku === item.sku);
 
-if (found) {
-    found.qty++;
-} else {
-    cart.push({
-        sku: item.sku,
-        name: item.name,
-        price: item.price,
-        qty: 1
-    });
+    if (found) found.qty++;
+    else cart.push({ ...item, qty: 1 });
+
+    renderCart();
 }
 
-renderCart();
-```
+function changeQty(sku, val) {
 
-}
+    let item = cart.find(x => x.sku === sku);
 
-function changeQty(sku, value) {
+    if (!item) return;
 
-```
-const item =
-    cart.find(x => x.sku === sku);
+    item.qty += val;
 
-if (!item) return;
+    if (item.qty <= 0)
+        cart = cart.filter(x => x.sku !== sku);
 
-item.qty += value;
-
-if (item.qty <= 0) {
-    cart = cart.filter(x => x.sku !== sku);
-}
-
-renderCart();
-```
-
-}
-
-function removeItem(sku) {
-
-```
-cart =
-    cart.filter(x => x.sku !== sku);
-
-renderCart();
-```
-
+    renderCart();
 }
 
 function clearCart() {
-
-```
-cart = [];
-
-renderCart();
-```
-
+    cart = [];
+    renderCart();
 }
 
 function renderCart() {
 
-```
-const box =
-    document.getElementById("cart-items");
+    const box = document.getElementById("cart-items");
 
-let count = 0;
-let total = 0;
+    let total = 0;
+    let count = 0;
 
-box.innerHTML = "";
+    box.innerHTML = "";
 
-cart.forEach(item => {
+    cart.forEach(item => {
 
-    count += item.qty;
-    total += item.qty * item.price;
+        total += item.price * item.qty;
+        count += item.qty;
 
-    const div =
-        document.createElement("div");
+        const div = document.createElement("div");
 
-    div.className = "cart-item";
+        div.innerHTML = `
+            ${item.name} x${item.qty}
+            <button onclick="changeQty('${item.sku}', -1)">-</button>
+            <button onclick="changeQty('${item.sku}', 1)">+</button>
+        `;
 
-    div.innerHTML = `
-        <span>
-            ${item.name}
-        </span>
+        box.appendChild(div);
+    });
 
-        <div class="cart-controls">
+    document.getElementById("cart-count").innerText = count + " Ürün";
+    document.getElementById("total-price").innerText = total + " ₺";
 
-            <button onclick="changeQty('${item.sku}', -1)">
-                -
-            </button>
-
-            <span>
-                ${item.qty}
-            </span>
-
-            <button onclick="changeQty('${item.sku}', 1)">
-                +
-            </button>
-
-            <button onclick="removeItem('${item.sku}')">
-                🗑
-            </button>
-
-        </div>
-    `;
-
-    box.appendChild(div);
-});
-
-document.getElementById("cart-count")
-    .innerText = count + " Ürün";
-
-document.getElementById("total-price")
-    .innerText = total + " ₺";
-
-const mobile =
-    document.getElementById("mobile-total");
-
-if (mobile) {
-    mobile.innerText = total + " ₺";
-}
-
-localStorage.setItem(
-    "cart",
-    JSON.stringify(cart)
-);
-```
-
+    localStorage.setItem("cart", JSON.stringify(cart));
 }
 
 function sendWhatsApp() {
 
-```
-const table =
-    document.getElementById("tableNo").value;
+    const table = document.getElementById("tableNo").value;
 
-if (!table) {
+    if (!table) return alert("Masa no gir!");
 
-    alert("Masa numarası giriniz.");
+    let msg = "Sipariş\nMasa: " + table + "\n\n";
 
-    return;
-}
+    let total = 0;
 
-if (cart.length === 0) {
+    cart.forEach(i => {
+        msg += i.name + " x" + i.qty + "\n";
+        total += i.price * i.qty;
+    });
 
-    alert("Sepet boş.");
+    msg += "\nToplam: " + total;
 
-    return;
-}
+    const phone = "90XXXXXXXXXX";
 
-let total = 0;
+    window.open(
+        `https://wa.me/${phone}?text=${encodeURIComponent(msg)}`
+    );
 
-let message =
-    `🍽️ SİPARİŞ\n\nMasa: ${table}\n\n`;
-
-cart.forEach(item => {
-
-    total += item.price * item.qty;
-
-    message +=
-        `${item.name} x${item.qty}\n`;
-});
-
-message +=
-    `\nToplam: ${total} ₺`;
-
-localStorage.setItem(
-    "orders",
-    JSON.stringify([
-        ...(JSON.parse(
-            localStorage.getItem("orders")
-        ) || []),
-        {
-            table,
-            items: [...cart],
-            total,
-            date: Date.now()
-        }
-    ])
-);
-
-alert("Sipariş kaydedildi.");
-
-clearCart();
-```
-
+    clearCart();
 }
 
 init();
