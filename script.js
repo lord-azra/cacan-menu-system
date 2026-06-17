@@ -106,7 +106,7 @@ function sendWhatsApp() {
     cart.forEach(i => msg += `${i.name} x${i.qty} (${i.price * i.qty}₺)\n`);
     const total = cart.reduce((sum, i) => sum + (i.price * i.qty), 0);
     msg += `\n*Toplam Tutar: ${total} ₺*`;
-    window.open(`https://wa.me/90XXXXXXXXXX?text=${encodeURIComponent(msg)}`);
+    window.open(`https://wa.me/905316753924?text=${encodeURIComponent(msg)}`);
     clearCart();
 }
 
