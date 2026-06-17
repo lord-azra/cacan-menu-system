@@ -1,118 +1,43 @@
 <!DOCTYPE html>
-
 <html lang="tr">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ÇAÇAN KÖFTE & KUMRU</title>
-
-```
-<link rel="stylesheet" href="style.css">
-```
-
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-```
-<!-- HEADER -->
 <header class="header">
     <h1>ÇAÇAN KÖFTE & KUMRU</h1>
-    <p>Lezzetin Adresi</p>
 </header>
 
-<!-- ARAMA -->
 <section class="search-section">
-    <input
-        id="searchInput"
-        type="text"
-        placeholder="Ürün ara..."
-        autocomplete="off">
+    <input id="searchInput" type="text" placeholder="Ürün ara...">
 </section>
 
-<!-- KATEGORİ MENÜ -->
 <nav id="category-nav" class="category-nav"></nav>
 
-<!-- MENÜ -->
-<main id="menu-container">
-    <div class="loading">
-        Menü yükleniyor...
-    </div>
-</main>
+<main id="menu-container">Menü yükleniyor...</main>
 
-<!-- SEPET PANELİ -->
 <aside id="cart-panel">
 
-    <div class="cart-header">
-        <h2>🛒 Sepet</h2>
-    </div>
+    <h2>Sepet</h2>
 
     <div id="cart-items"></div>
 
-    <div class="cart-summary">
+    <p id="cart-count">0 Ürün</p>
+    <p id="total-price">0 ₺</p>
 
-        <div class="summary-row">
-            <span>Ürün Sayısı</span>
-            <strong id="cart-count">0 Ürün</strong>
-        </div>
+    <input id="tableNo" type="text" placeholder="Masa No">
 
-        <div class="summary-row">
-            <span>Toplam</span>
-            <strong id="total-price">0 ₺</strong>
-        </div>
-
-    </div>
-
-    <!-- MASA -->
-    <div class="table-section">
-
-        <label for="tableNo">
-            Masa Numarası
-        </label>
-
-        <input
-            id="tableNo"
-            type="text"
-            placeholder="Örn: 12">
-
-    </div>
-
-    <!-- BUTONLAR -->
-    <div class="cart-buttons">
-
-        <button
-            id="clear-cart-btn"
-            onclick="clearCart()">
-            🗑 Sepeti Temizle
-        </button>
-
-        <button
-            id="send-order-btn"
-            onclick="sendWhatsApp()">
-            📲 Siparişi Gönder
-        </button>
-
-    </div>
+    <button onclick="sendWhatsApp()">Siparişi Gönder</button>
+    <button onclick="clearCart()">Sepeti Temizle</button>
 
 </aside>
 
-<!-- ALT SABİT BAR -->
-<div id="mobile-cart-bar">
-
-    <span id="mobile-total">
-        0 ₺
-    </span>
-
-    <button onclick="sendWhatsApp()">
-        Siparişi Tamamla
-    </button>
-
-</div>
-
 <script src="script.js"></script>
-```
 
 </body>
-
 </html>
