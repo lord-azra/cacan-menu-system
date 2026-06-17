@@ -6,7 +6,6 @@
     <title>ÇAÇAN KÖFTE & KUMRU</title>
     <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
 <header class="header">
@@ -22,22 +21,16 @@
 <main id="menu-container">Menü yükleniyor...</main>
 
 <aside id="cart-panel">
-
     <h2>Sepet</h2>
-
     <div id="cart-items"></div>
-
-    <p id="cart-count">0 Ürün</p>
-    <p id="total-price">0 ₺</p>
-
-    <input id="tableNo" type="text" placeholder="Masa No">
-
-    <button onclick="sendWhatsApp()">Siparişi Gönder</button>
-    <button onclick="clearCart()">Sepeti Temizle</button>
-
+    <p><strong><span id="cart-count">0 Ürün</span> | Toplam: <span id="total-price">0 ₺</span></strong></p>
+    
+    <input id="tableNo" type="text" placeholder="Masa No (Örn: 5)">
+    
+    <button onclick="sendWhatsApp()" id="sendOrderBtn">Siparişi Gönder</button>
+    <button onclick="clearCart()" style="background: #a0522d;">Sepeti Temizle</button>
 </aside>
 
 <script src="script.js"></script>
-
 </body>
 </html>
