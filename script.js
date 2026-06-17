@@ -154,3 +154,44 @@ function changeQty(sku, value) {
 
     renderCart();
 }
+function renderCart() {
+
+    const cartItems = document.getElementById("cart-items");
+    const count = document.getElementById("cart-count");
+    const total = document.getElementById("total-price");
+
+    if (!cartItems || !count || !total) return;
+
+    cartItems.innerHTML = "";
+
+    let totalPrice = 0;
+    let totalCount = 0;
+
+    cart.forEach(item => {
+
+        totalPrice += item.price * item.qty;
+        totalCount += item.qty;
+
+        const div = document.createElement("div");
+        div.className = "cart-item";
+
+        div.innerHTML = `
+            <span>${item.name}</span>
+
+            <div class="cart-controls">
+                <button onclick="changeQty('${item.sku}', -1)">-</button>
+                <span>${item.qty}</span>
+                <button onclick="changeQty('${item.sku}', 1)">+</button>
+
+                <button onclick="removeItem('${item.sku}')">🗑</button>
+            </div>
+        `;
+
+        cartItems.appendChild(div);
+    });
+
+    count.textContent = totalCount + " Ürün";
+    total.textContent = totalPrice + " ₺";
+
+    localStorage.setItem("cart", JSON.stringify(cart));
+}
