@@ -21,7 +21,6 @@ async function init() {
 
                 const navLink = document.createElement("a");
                 navLink.href = `#${category.id}`;
-                navLink.className = "nav-link";
                 navLink.textContent = category.title;
                 nav.appendChild(navLink);
 
@@ -34,6 +33,11 @@ async function init() {
 
                     const card = document.createElement("div");
                     card.className = "product-card";
+                    card.style.cursor = "pointer";
+
+                    card.onclick = () => {
+                        addToCart(item.sku, item.name, item.price);
+                    };
 
                     card.innerHTML = `
                         <div>
@@ -41,12 +45,7 @@ async function init() {
                             ${item.tag ? `<span class="tag">${item.tag}</span>` : ""}
                         </div>
 
-                        <div>
-                            <div class="price">${item.price} ₺</div>
-                            <button onclick="addToCart('${item.sku}','${item.name}',${item.price})">
-                                Ekle
-                            </button>
-                        </div>
+                        <div class="price">${item.price} ₺</div>
                     `;
 
                     section.appendChild(card);
@@ -57,7 +56,7 @@ async function init() {
 
     } catch (error) {
         console.error(error);
-        container.innerHTML = "Hata: Menü yüklenemedi";
+        container.innerHTML = "Menü yüklenemedi";
     }
 
     renderCart();
@@ -65,10 +64,10 @@ async function init() {
 
 function addToCart(sku, name, price) {
 
-    const existing = cart.find(x => x.sku === sku);
+    const item = cart.find(x => x.sku === sku);
 
-    if (existing) {
-        existing.qty++;
+    if (item) {
+        item.qty++;
     } else {
         cart.push({ sku, name, price, qty: 1 });
     }
@@ -76,70 +75,6 @@ function addToCart(sku, name, price) {
     renderCart();
 }
 
-function renderCart() {
-
-    const cartItems = document.getElementById("cart-items");
-    const count = document.getElementById("cart-count");
-    const total = document.getElementById("total-price");
-
-    if (!cartItems || !count || !total) return;
-
-    cartItems.innerHTML = "";
-
-    let totalPrice = 0;
-    let totalCount = 0;
-
-    cart.forEach(item => {
-
-        totalPrice += item.price * item.qty;
-        totalCount += item.qty;
-
-        const div = document.createElement("div");
-        div.textContent = `${item.name} x${item.qty}`;
-        cartItems.appendChild(div);
-    });
-
-    count.textContent = totalCount + " Ürün";
-    total.textContent = totalPrice + " ₺";
-
-    localStorage.setItem("cart", JSON.stringify(cart));
-}
-
-function sendWhatsApp() {
-
-    if (isSending) return;
-    isSending = true;
-
-    const table = document.getElementById("tableNo").value;
-
-    if (!table) {
-        alert("Masa numarası gir!");
-        isSending = false;
-        return;
-    }
-
-    let message = `🍽️ SİPARİŞ\nMasa: ${table}\n\n`;
-
-    let total = 0;
-
-    cart.forEach(item => {
-        message += `- ${item.name} x${item.qty} = ${item.price * item.qty} ₺\n`;
-        total += item.price * item.qty;
-    });
-
-    message += `\nTOPLAM: ${total} ₺`;
-
-    const phone = "905316753924";
-    const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
-
-    window.open(url, "_blank");
-
-    setTimeout(() => {
-        isSending = false;
-    }, 2000);
-}
-
-init();
 function changeQty(sku, value) {
 
     const item = cart.find(x => x.sku === sku);
@@ -154,6 +89,17 @@ function changeQty(sku, value) {
 
     renderCart();
 }
+
+function removeItem(sku) {
+    cart = cart.filter(x => x.sku !== sku);
+    renderCart();
+}
+
+function clearCart() {
+    cart = [];
+    renderCart();
+}
+
 function renderCart() {
 
     const cartItems = document.getElementById("cart-items");
@@ -195,3 +141,52 @@ function renderCart() {
 
     localStorage.setItem("cart", JSON.stringify(cart));
 }
+
+function getTableNo() {
+
+    const input = document.getElementById("tableNo");
+    const text = document.getElementById("tableText");
+
+    // input varsa onu al
+    if (input && input.value.trim() !== "") {
+        return input.value;
+    }
+
+    // alternatif yazı alanı varsa onu al
+    if (text && text.value.trim() !== "") {
+        return text.value;
+    }
+
+    return null;
+}
+
+function sendWhatsApp() {
+
+    if (isSending) return;
+    isSending = true;
+
+    const table = getTableNo();
+
+    if (!table) {
+        alert("Masa numarası gir!");
+        isSending = false;
+        return;
+    }
+
+    let msg = `🍽️ SİPARİŞ\nMasa: ${table}\n\n`;
+    let total = 0;
+
+    cart.forEach(i => {
+        msg += `- ${i.name} x${i.qty} = ${i.price * i.qty} ₺\n`;
+        total += i.price * i.qty;
+    });
+
+    msg += `\nTOPLAM: ${total} ₺`;
+
+    const phone = "905316753924";
+    window.open(`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`);
+
+    setTimeout(() => isSending = false, 2000);
+}
+
+init();
