@@ -1,148 +1,300 @@
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
+let menuData = null;
 
 async function init() {
 
+```
+try {
+
     const res = await fetch("./data/menu.json");
-    const data = await res.json();
+    menuData = await res.json();
 
-    const container = document.getElementById("menu-container");
-    const nav = document.getElementById("category-nav");
+    renderMenu(menuData.categories);
+    renderCart();
 
-    container.innerHTML = "";
-    nav.innerHTML = "";
+    document.getElementById("searchInput")
+        .addEventListener("input", searchProducts);
 
-    data.categories.forEach(cat => {
+} catch (err) {
+    console.error(err);
 
-        const link = document.createElement("a");
-        link.href = "#" + cat.id;
-        link.textContent = cat.title;
-        nav.appendChild(link);
+    document.getElementById("menu-container").innerHTML =
+        "<p>Menü yüklenemedi.</p>";
+}
+```
 
-        const section = document.createElement("section");
-        section.id = cat.id;
+}
 
-        cat.items.forEach(item => {
+function renderMenu(categories) {
 
-            const card = document.createElement("div");
-            card.className = "product-card";
+```
+const container = document.getElementById("menu-container");
+const nav = document.getElementById("category-nav");
 
-            card.onclick = () => addToCart(item);
+container.innerHTML = "";
+nav.innerHTML = "";
 
-            card.innerHTML = `
-                <div>${item.name}</div>
-                <div>${item.price} ₺</div>
-            `;
+categories.forEach(cat => {
 
-            section.appendChild(card);
-        });
+    const link = document.createElement("a");
 
-        container.appendChild(section);
+    link.href = "#" + cat.id;
+    link.textContent = cat.title;
+
+    nav.appendChild(link);
+
+    const section = document.createElement("section");
+
+    section.id = cat.id;
+
+    section.innerHTML =
+        `<h2>${cat.title}</h2>`;
+
+    cat.items.forEach(item => {
+
+        const card = document.createElement("div");
+
+        card.className = "product-card";
+
+        card.innerHTML = `
+            <div>
+                <div class="product-name">
+                    ${item.name}
+                </div>
+
+                ${item.tag ?
+                    `<span class="tag">${item.tag}</span>`
+                    : ""
+                }
+            </div>
+
+            <div class="price">
+                ${item.price} ₺
+            </div>
+        `;
+
+        card.onclick = () => addToCart(item);
+
+        section.appendChild(card);
     });
 
-    renderCart();
+    container.appendChild(section);
+});
+```
+
+}
+
+function searchProducts() {
+
+```
+const text =
+    document.getElementById("searchInput")
+    .value
+    .toLowerCase();
+
+const filtered = {
+    categories: menuData.categories.map(cat => ({
+        ...cat,
+        items: cat.items.filter(item =>
+            item.name.toLowerCase().includes(text)
+        )
+    }))
+};
+
+renderMenu(filtered.categories);
+```
+
 }
 
 function addToCart(item) {
 
-    let found = cart.find(x => x.sku === item.sku);
+```
+const found =
+    cart.find(x => x.sku === item.sku);
 
-    if (found) {
-        found.qty++;
-    } else {
-        cart.push({
-            sku: item.sku,
-            name: item.name,
-            price: item.price,
-            qty: 1
-        });
-    }
+if (found) {
+    found.qty++;
+} else {
+    cart.push({
+        sku: item.sku,
+        name: item.name,
+        price: item.price,
+        qty: 1
+    });
+}
 
-    renderCart();
+renderCart();
+```
+
 }
 
 function changeQty(sku, value) {
 
-    let item = cart.find(x => x.sku === sku);
+```
+const item =
+    cart.find(x => x.sku === sku);
 
-    if (!item) return;
+if (!item) return;
 
-    item.qty += value;
+item.qty += value;
 
-    if (item.qty <= 0) {
-        cart = cart.filter(x => x.sku !== sku);
-    }
+if (item.qty <= 0) {
+    cart = cart.filter(x => x.sku !== sku);
+}
 
-    renderCart();
+renderCart();
+```
+
 }
 
 function removeItem(sku) {
-    cart = cart.filter(x => x.sku !== sku);
-    renderCart();
+
+```
+cart =
+    cart.filter(x => x.sku !== sku);
+
+renderCart();
+```
+
 }
 
 function clearCart() {
-    cart = [];
-    renderCart();
+
+```
+cart = [];
+
+renderCart();
+```
+
 }
 
 function renderCart() {
 
-    let box = document.getElementById("cart-items");
-    let count = 0;
-    let total = 0;
+```
+const box =
+    document.getElementById("cart-items");
 
-    box.innerHTML = "";
+let count = 0;
+let total = 0;
 
-    cart.forEach(item => {
+box.innerHTML = "";
 
-        count += item.qty;
-        total += item.qty * item.price;
+cart.forEach(item => {
 
-        let div = document.createElement("div");
+    count += item.qty;
+    total += item.qty * item.price;
 
-        div.innerHTML = `
+    const div =
+        document.createElement("div");
+
+    div.className = "cart-item";
+
+    div.innerHTML = `
+        <span>
             ${item.name}
-            x${item.qty}
-            <button onclick="changeQty('${item.sku}', -1)">-</button>
-            <button onclick="changeQty('${item.sku}', 1)">+</button>
-            <button onclick="removeItem('${item.sku}')">🗑</button>
-        `;
+        </span>
 
-        box.appendChild(div);
-    });
+        <div class="cart-controls">
 
-    document.getElementById("cart-count").innerText = count;
-    document.getElementById("total-price").innerText = total + " ₺";
+            <button onclick="changeQty('${item.sku}', -1)">
+                -
+            </button>
 
-    localStorage.setItem("cart", JSON.stringify(cart));
+            <span>
+                ${item.qty}
+            </span>
+
+            <button onclick="changeQty('${item.sku}', 1)">
+                +
+            </button>
+
+            <button onclick="removeItem('${item.sku}')">
+                🗑
+            </button>
+
+        </div>
+    `;
+
+    box.appendChild(div);
+});
+
+document.getElementById("cart-count")
+    .innerText = count + " Ürün";
+
+document.getElementById("total-price")
+    .innerText = total + " ₺";
+
+const mobile =
+    document.getElementById("mobile-total");
+
+if (mobile) {
+    mobile.innerText = total + " ₺";
 }
 
-function sendOrder() {
+localStorage.setItem(
+    "cart",
+    JSON.stringify(cart)
+);
+```
 
-    const table = document.getElementById("tableNo").value;
+}
 
-    if (!table) {
-        alert("Masa numarası gir!");
-        return;
-    }
+function sendWhatsApp() {
 
-    let orders = JSON.parse(localStorage.getItem("orders")) || [];
+```
+const table =
+    document.getElementById("tableNo").value;
 
-    const total = cart.reduce((a,b) => a + b.price * b.qty, 0);
+if (!table) {
 
-    orders.push({
-        table: table,
-        items: cart,
-        total: total,
-        time: Date.now()
-    });
+    alert("Masa numarası giriniz.");
 
-    localStorage.setItem("orders", JSON.stringify(orders));
+    return;
+}
 
-    cart = [];
-    renderCart();
+if (cart.length === 0) {
 
-    alert("Sipariş gönderildi!");
+    alert("Sepet boş.");
+
+    return;
+}
+
+let total = 0;
+
+let message =
+    `🍽️ SİPARİŞ\n\nMasa: ${table}\n\n`;
+
+cart.forEach(item => {
+
+    total += item.price * item.qty;
+
+    message +=
+        `${item.name} x${item.qty}\n`;
+});
+
+message +=
+    `\nToplam: ${total} ₺`;
+
+localStorage.setItem(
+    "orders",
+    JSON.stringify([
+        ...(JSON.parse(
+            localStorage.getItem("orders")
+        ) || []),
+        {
+            table,
+            items: [...cart],
+            total,
+            date: Date.now()
+        }
+    ])
+);
+
+alert("Sipariş kaydedildi.");
+
+clearCart();
+```
+
 }
 
 init();
