@@ -1,5 +1,4 @@
-let cart = JSON.parse(localStorage.getItem("cart")) || []; 
-let cart = [];
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
 async function init() {
 
@@ -8,7 +7,6 @@ async function init() {
 
     try {
         const response = await fetch("./data/menu.json");
-
         if (!response.ok) throw new Error("JSON yüklenemedi");
 
         const data = await response.json();
@@ -20,20 +18,16 @@ async function init() {
             .sort((a, b) => a.order - b.order)
             .forEach(category => {
 
-                // NAV
                 const navLink = document.createElement("a");
                 navLink.href = `#${category.id}`;
                 navLink.className = "nav-link";
                 navLink.textContent = category.title;
                 nav.appendChild(navLink);
 
-                // SECTION
                 const section = document.createElement("section");
                 section.id = category.id;
 
-                section.innerHTML = `
-                    <h2 class="category-title">${category.title}</h2>
-                `;
+                section.innerHTML = `<h2 class="category-title">${category.title}</h2>`;
 
                 category.items.forEach(item => {
 
@@ -48,7 +42,7 @@ async function init() {
 
                         <div>
                             <div class="price">${item.price} ₺</div>
-                            <button onclick="addToCart('${item.sku}', '${item.name}', ${item.price})">
+                            <button onclick="addToCart('${item.sku}','${item.name}',${item.price})">
                                 Ekle
                             </button>
                         </div>
@@ -64,9 +58,10 @@ async function init() {
         console.error(error);
         container.innerHTML = "Hata: Menü yüklenemedi";
     }
+
+    renderCart();
 }
 
-// SEPETE EKLE
 function addToCart(sku, name, price) {
 
     const existing = cart.find(x => x.sku === sku);
@@ -80,12 +75,13 @@ function addToCart(sku, name, price) {
     renderCart();
 }
 
-// SEPETİ ÇİZ
 function renderCart() {
 
     const cartItems = document.getElementById("cart-items");
     const count = document.getElementById("cart-count");
     const total = document.getElementById("total-price");
+
+    if (!cartItems || !count || !total) return;
 
     cartItems.innerHTML = "";
 
@@ -98,19 +94,16 @@ function renderCart() {
         totalCount += item.qty;
 
         const div = document.createElement("div");
-        div.innerHTML = `
-            ${item.name} x${item.qty}
-        `;
-
+        div.textContent = `${item.name} x${item.qty}`;
         cartItems.appendChild(div);
     });
 
     count.textContent = totalCount + " Ürün";
     total.textContent = totalPrice + " ₺";
+
+    localStorage.setItem("cart", JSON.stringify(cart));
 }
 
-init();
-localStorage.setItem("cart", JSON.stringify(cart));
 function sendWhatsApp() {
 
     const table = document.getElementById("tableNo").value;
@@ -131,10 +124,11 @@ function sendWhatsApp() {
 
     message += `\nTOPLAM: ${total} ₺`;
 
-    const phone = "905316753924"; // BURAYA işletme numarası
+    const phone = "905316753924";
 
     const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
 
     window.open(url, "_blank");
 }
-localStorage.setItem("cart", JSON.stringify(cart));
+
+init();
