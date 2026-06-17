@@ -62,13 +62,13 @@
         { "sku": "T001", "name": "Kaşarlı Tost", "price": 130, "available": true },
         { "sku": "T002", "name": "Karışık Tost", "price": 120, "available": true },
         { "sku": "T003", "name": "Atom Tost", "price": 180, "available": true },
-        { "sku": "T004", "name": "Sucuklu Tost", "price": 140, "available": true },
-        { "sku": "T005", "name": "Kavurmalı Tost", "price": 190, "available": true },
-        { "sku": "T006", "name": "Ton Balıklı Tost", "price": 170, "available": true },
-        { "sku": "T007", "name": "Çikolatalı Tost", "price": 90, "available": true },
-        { "sku": "T008", "name": "Beyaz Peynirli Tost", "price": 110, "available": true },
-        { "sku": "T009", "name": "Pastırmalı Tost", "price": 210, "available": true },
-        { "sku": "T010", "name": "Bazlama Tost", "price": 200, "available": true }
+        { "sku": "T004", "name": "Mega Tost", "price": 150, "available": true },
+        { "sku": "T005", "name": "Kavurmalı Tost", "price": 200, "available": true },
+        { "sku": "T006", "name": "Domatesli Tost", "price": 140, "available": true },
+        { "sku": "T007", "name": "Yumurtalı Tost", "price": 140, "available": true },
+        { "sku": "T008", "name": "Patatesli Tost", "price": 150, "available": true },
+        { "sku": "T009", "name": "Köfteli Tost", "price": 180, "available": true },
+        { "sku": "T010", "name": "Özel Tost", "price": 300, "available": true }
       ]
     }
   ]
