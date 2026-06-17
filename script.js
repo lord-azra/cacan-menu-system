@@ -140,3 +140,17 @@ function sendWhatsApp() {
 }
 
 init();
+function changeQty(sku, value) {
+
+    const item = cart.find(x => x.sku === sku);
+
+    if (!item) return;
+
+    item.qty += value;
+
+    if (item.qty <= 0) {
+        cart = cart.filter(x => x.sku !== sku);
+    }
+
+    renderCart();
+}
