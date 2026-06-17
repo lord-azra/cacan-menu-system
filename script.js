@@ -1,4 +1,5 @@
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
+let isSending = false;
 
 async function init() {
 
@@ -106,10 +107,14 @@ function renderCart() {
 
 function sendWhatsApp() {
 
+    if (isSending) return;
+    isSending = true;
+
     const table = document.getElementById("tableNo").value;
 
     if (!table) {
         alert("Masa numarası gir!");
+        isSending = false;
         return;
     }
 
@@ -125,10 +130,13 @@ function sendWhatsApp() {
     message += `\nTOPLAM: ${total} ₺`;
 
     const phone = "905316753924";
-
     const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
 
     window.open(url, "_blank");
+
+    setTimeout(() => {
+        isSending = false;
+    }, 2000);
 }
 
 init();
