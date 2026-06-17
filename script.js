@@ -1,75 +1,60 @@
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
-let isSending = false;
 
 async function init() {
+
+    const res = await fetch("./data/menu.json");
+    const data = await res.json();
 
     const container = document.getElementById("menu-container");
     const nav = document.getElementById("category-nav");
 
-    try {
-        const response = await fetch("./data/menu.json");
-        if (!response.ok) throw new Error("JSON yüklenemedi");
+    container.innerHTML = "";
+    nav.innerHTML = "";
 
-        const data = await response.json();
+    data.categories.forEach(cat => {
 
-        container.innerHTML = "";
-        nav.innerHTML = "";
+        const link = document.createElement("a");
+        link.href = "#" + cat.id;
+        link.textContent = cat.title;
+        nav.appendChild(link);
 
-        data.categories
-            .sort((a, b) => a.order - b.order)
-            .forEach(category => {
+        const section = document.createElement("section");
+        section.id = cat.id;
 
-                const navLink = document.createElement("a");
-                navLink.href = `#${category.id}`;
-                navLink.textContent = category.title;
-                nav.appendChild(navLink);
+        cat.items.forEach(item => {
 
-                const section = document.createElement("section");
-                section.id = category.id;
+            const card = document.createElement("div");
+            card.className = "product-card";
 
-                section.innerHTML = `<h2 class="category-title">${category.title}</h2>`;
+            card.onclick = () => addToCart(item);
 
-                category.items.forEach(item => {
+            card.innerHTML = `
+                <div>${item.name}</div>
+                <div>${item.price} ₺</div>
+            `;
 
-                    const card = document.createElement("div");
-                    card.className = "product-card";
-                    card.style.cursor = "pointer";
+            section.appendChild(card);
+        });
 
-                    card.onclick = () => {
-                        addToCart(item.sku, item.name, item.price);
-                    };
-
-                    card.innerHTML = `
-                        <div>
-                            <div class="product-name">${item.name}</div>
-                            ${item.tag ? `<span class="tag">${item.tag}</span>` : ""}
-                        </div>
-
-                        <div class="price">${item.price} ₺</div>
-                    `;
-
-                    section.appendChild(card);
-                });
-
-                container.appendChild(section);
-            });
-
-    } catch (error) {
-        console.error(error);
-        container.innerHTML = "Menü yüklenemedi";
-    }
+        container.appendChild(section);
+    });
 
     renderCart();
 }
 
-function addToCart(sku, name, price) {
+function addToCart(item) {
 
-    const item = cart.find(x => x.sku === sku);
+    let found = cart.find(x => x.sku === item.sku);
 
-    if (item) {
-        item.qty++;
+    if (found) {
+        found.qty++;
     } else {
-        cart.push({ sku, name, price, qty: 1 });
+        cart.push({
+            sku: item.sku,
+            name: item.name,
+            price: item.price,
+            qty: 1
+        });
     }
 
     renderCart();
@@ -77,7 +62,7 @@ function addToCart(sku, name, price) {
 
 function changeQty(sku, value) {
 
-    const item = cart.find(x => x.sku === sku);
+    let item = cart.find(x => x.sku === sku);
 
     if (!item) return;
 
@@ -102,91 +87,62 @@ function clearCart() {
 
 function renderCart() {
 
-    const cartItems = document.getElementById("cart-items");
-    const count = document.getElementById("cart-count");
-    const total = document.getElementById("total-price");
+    let box = document.getElementById("cart-items");
+    let count = 0;
+    let total = 0;
 
-    if (!cartItems || !count || !total) return;
-
-    cartItems.innerHTML = "";
-
-    let totalPrice = 0;
-    let totalCount = 0;
+    box.innerHTML = "";
 
     cart.forEach(item => {
 
-        totalPrice += item.price * item.qty;
-        totalCount += item.qty;
+        count += item.qty;
+        total += item.qty * item.price;
 
-        const div = document.createElement("div");
-        div.className = "cart-item";
+        let div = document.createElement("div");
 
         div.innerHTML = `
-            <span>${item.name}</span>
-
-            <div class="cart-controls">
-                <button onclick="changeQty('${item.sku}', -1)">-</button>
-                <span>${item.qty}</span>
-                <button onclick="changeQty('${item.sku}', 1)">+</button>
-
-                <button onclick="removeItem('${item.sku}')">🗑</button>
-            </div>
+            ${item.name}
+            x${item.qty}
+            <button onclick="changeQty('${item.sku}', -1)">-</button>
+            <button onclick="changeQty('${item.sku}', 1)">+</button>
+            <button onclick="removeItem('${item.sku}')">🗑</button>
         `;
 
-        cartItems.appendChild(div);
+        box.appendChild(div);
     });
 
-    count.textContent = totalCount + " Ürün";
-    total.textContent = totalPrice + " ₺";
+    document.getElementById("cart-count").innerText = count;
+    document.getElementById("total-price").innerText = total + " ₺";
 
     localStorage.setItem("cart", JSON.stringify(cart));
 }
 
-function getTableNo() {
+function sendOrder() {
 
-    const input = document.getElementById("tableNo");
-    const text = document.getElementById("tableText");
-
-    // input varsa onu al
-    if (input && input.value.trim() !== "") {
-        return input.value;
-    }
-
-    // alternatif yazı alanı varsa onu al
-    if (text && text.value.trim() !== "") {
-        return text.value;
-    }
-
-    return null;
-}
-
-function sendWhatsApp() {
-
-    if (isSending) return;
-    isSending = true;
-
-    const table = getTableNo();
+    const table = document.getElementById("tableNo").value;
 
     if (!table) {
         alert("Masa numarası gir!");
-        isSending = false;
         return;
     }
 
-    let msg = `🍽️ SİPARİŞ\nMasa: ${table}\n\n`;
-    let total = 0;
+    let orders = JSON.parse(localStorage.getItem("orders")) || [];
 
-    cart.forEach(i => {
-        msg += `- ${i.name} x${i.qty} = ${i.price * i.qty} ₺\n`;
-        total += i.price * i.qty;
+    const total = cart.reduce((a,b) => a + b.price * b.qty, 0);
+
+    orders.push({
+        table: table,
+        items: cart,
+        total: total,
+        time: Date.now()
     });
 
-    msg += `\nTOPLAM: ${total} ₺`;
+    localStorage.setItem("orders", JSON.stringify(orders));
 
-    const phone = "905316753924";
-    window.open(`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`);
+    cart = [];
+    renderCart();
 
-    setTimeout(() => isSending = false, 2000);
+    alert("Sipariş gönderildi!");
 }
 
 init();
