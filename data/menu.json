@@ -17,7 +17,7 @@
         { "sku": "KU001", "name": "Patatesli Kumru", "price": 180, "available": true },
         { "sku": "KU002", "name": "Sade Kumru", "price": 180, "available": true },
         { "sku": "KU003", "name": "Yumurtalı Kumru", "price": 200, "available": true },
-        { "sku": "KU004", "name": "Atom Kumru", "price": 250, "available": true }
+        { "sku": "KU004", "name": "Atom Kumru", "price": 250, "available": true },
         { "sku": "KU005", "name": "Tam Ekmek Kumru", "price": 250, "available": true }
       ]
     },
@@ -37,7 +37,11 @@
       "items": [
         { "sku": "T001", "name": "Kaşarlı Tost", "price": 130, "available": true },
         { "sku": "T002", "name": "Karışık Tost", "price": 120, "available": true },
-        { "sku": "T003", "name": "Atom Tost", "price": 180, "available": true }
+        { "sku": "T003", "name": "Atom Tost", "price": 180, "available": true },
+        { "sku": "T004", "name": "Sucuklu Tost", "price": 140, "available": true },
+        { "sku": "T005", "name": "Kavurmalı Tost", "price": 190, "available": true },
+        { "sku": "T006", "name": "Ton Balıklı Tost", "price": 170, "available": true },
+        { "sku": "T007", "name": "Çikolatalı Tost", "price": 90, "available": true }
       ]
     },
     {
@@ -46,9 +50,9 @@
       "items": [
         { "sku": "P001", "name": "1 Porsiyon Tavuklu Pilav", "price": 180, "available": true },
         { "sku": "P002", "name": "1.5 Porsiyon Tavuklu Pilav", "price": 250, "available": true },
-        { "sku": "P003", "name": "Porsiyon Tavuk Pilav Köfte", "price": 250, "available": true }
-        { "sku": "P004", "name": "1 Porsiyon Sade Tavuk", "price": 200, "available": true }
-      { "sku": "P005", "name": "1 Porsiyon Sade Pilav", "price": 180, "available": true }
+        { "sku": "P003", "name": "Porsiyon Tavuk Pilav Köfte", "price": 250, "available": true },
+        { "sku": "P004", "name": "1 Porsiyon Sade Tavuk", "price": 200, "available": true },
+        { "sku": "P005", "name": "1 Porsiyon Sade Pilav", "price": 180, "available": true }
       ]
     },
     {
@@ -57,9 +61,9 @@
       "items": [
         { "sku": "PA001", "name": "Patso", "price": 120, "available": true },
         { "sku": "PA002", "name": "Kaşarlı Patso", "price": 150, "available": true },
-        { "sku": "PA003", "name": "Sucuklu Patso", "price": 150, "available": true }
-        { "sku": "PA004", "name": "Sısisli Patso", "price": 150, "available": true }
-        { "sku": "PA005", "name": "Özel Patso", "price": 180, "available": true }
+        { "sku": "PA003", "name": "Sucuklu Patso", "price": 150, "available": true },
+        { "sku": "PA004", "name": "Sosisli Patso", "price": 150, "available": true },
+        { "sku": "PA005", "name": "Özel Patso", "price": 180, "available": true },
         { "sku": "PA006", "name": "1 Porsiyon Patates Kızartması", "price": 100, "available": true }
       ]
     },
