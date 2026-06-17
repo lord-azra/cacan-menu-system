@@ -1,222 +1,44 @@
-/* RESET */
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-/* GENEL */
-
 body {
-    font-family: Arial, sans-serif;
-    background: #F5E6C8;
-    color: #3B2A1A;
-    min-height: 100vh;
-}
-
-/* HEADER */
-
-.header {
-    text-align: center;
-    padding: 25px 15px;
-    background: #8B5A2B;
+    font-family: Arial;
+    margin: 0;
+    background: #111;
     color: white;
-    box-shadow: 0 2px 10px rgba(0,0,0,.15);
 }
 
-.logo {
-    font-size: 28px;
-}
-
-.subtitle {
-    margin-top: 8px;
-    opacity: .9;
-}
-
-/* ARAMA */
-
-.search-section {
+header {
+    text-align: center;
     padding: 15px;
+    background: #222;
 }
-
-#searchInput {
-    width: 100%;
-    padding: 14px;
-    border: 2px solid #D9C3A3;
-    border-radius: 12px;
-    font-size: 16px;
-    background: #FFF8E7;
-}
-
-/* KATEGORİ NAV */
 
 #category-nav {
-    display: flex;
-    gap: 10px;
-    overflow-x: auto;
-
-    padding: 12px;
-
-    position: sticky;
-    top: 0;
-
-    background: #FFF8E7;
-
-    border-bottom: 1px solid #D9C3A3;
-
-    z-index: 100;
+    padding: 10px;
 }
 
 #category-nav a {
-    text-decoration: none;
-
-    color: #6B4226;
-
-    background: white;
-
-    border: 1px solid #D9C3A3;
-
-    border-radius: 25px;
-
-    padding: 8px 14px;
-
-    white-space: nowrap;
-
-    transition: .2s;
-}
-
-#category-nav a.active {
-    background: #D97706;
+    margin-right: 10px;
     color: white;
-}
-
-/* MENÜ */
-
-#menu-container {
-    padding: 15px;
-    padding-bottom: 320px;
-}
-
-.category-title {
-    margin-bottom: 15px;
-    color: #6B4226;
+    text-decoration: none;
 }
 
 .product-card {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    background: white;
-
-    padding: 15px;
-
-    margin-bottom: 10px;
-
-    border-radius: 12px;
-
-    box-shadow: 0 2px 6px rgba(0,0,0,.08);
-}
-
-.product-name {
-    font-weight: bold;
-}
-
-.price {
-    color: #D97706;
-    font-weight: bold;
-}
-
-.tag {
-    display: inline-block;
-
-    margin-top: 5px;
-
-    background: #D97706;
-
-    color: white;
-
-    font-size: 11px;
-
-    padding: 4px 8px;
-
+    padding: 10px;
+    margin: 5px;
+    background: #222;
+    cursor: pointer;
     border-radius: 8px;
 }
 
-/* SEPET */
-
-#cart-panel {
+#cart {
     position: fixed;
-
+    bottom: 0;
     left: 0;
     right: 0;
-    bottom: 0;
-
-    background: white;
-
-    padding: 15px;
-
-    border-top: 2px solid #D9C3A3;
-
-    box-shadow: 0 -4px 12px rgba(0,0,0,.12);
+    background: #000;
+    padding: 10px;
 }
 
-.cart-header {
-    display: flex;
-    justify-content: space-between;
-
-    margin-bottom: 10px;
-
-    font-weight: bold;
-}
-
-#cart-items {
-    max-height: 120px;
-    overflow-y: auto;
-}
-
-.cart-total {
-    margin-top: 10px;
-    font-size: 18px;
-    font-weight: bold;
-}
-
-#table-number {
-    width: 100%;
-
-    padding: 12px;
-
-    margin-top: 10px;
-
-    border: 1px solid #D9C3A3;
-
-    border-radius: 10px;
-}
-
-#send-order-btn {
-    width: 100%;
-
-    margin-top: 10px;
-
-    padding: 14px;
-
-    border: none;
-
-    border-radius: 10px;
-
-    background: #25D366;
-
-    color: white;
-
-    font-size: 16px;
-
-    font-weight: bold;
-
-    cursor: pointer;
-}
-
-.loading {
-    text-align: center;
-    margin-top: 50px;
+button {
+    padding: 8px;
+    margin-top: 5px;
 }
