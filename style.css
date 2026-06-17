@@ -1,8 +1,10 @@
+/* Genel Yapı */
 body {
     margin: 0;
-    font-family: Arial;
+    font-family: Arial, sans-serif;
     background: #f5efe4;
     color: #2c2c2c;
+    padding-bottom: 150px; /* Sepetin sayfayı kapatmaması için boşluk */
 }
 
 .header {
@@ -12,13 +14,17 @@ body {
     padding: 15px;
 }
 
+/* Arama ve Navigasyon */
 .search-section {
     padding: 10px;
 }
 
 #searchInput {
     width: 100%;
-    padding: 10px;
+    padding: 12px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 5px;
 }
 
 .category-nav {
@@ -27,33 +33,50 @@ body {
     gap: 10px;
     padding: 10px;
     background: #fff;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
 .category-nav a {
-    padding: 8px;
+    padding: 8px 15px;
     background: #f3e2c7;
     text-decoration: none;
     border-radius: 10px;
     color: #5a3e2b;
+    white-space: nowrap;
 }
 
+/* Ürün Kartları */
 .product-card {
     background: white;
     margin: 10px;
-    padding: 10px;
+    padding: 15px;
     border-radius: 10px;
     display: flex;
     justify-content: space-between;
-    cursor: pointer;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
 }
 
+/* Sepet Paneli */
 #cart-panel {
     position: fixed;
     bottom: 0;
     width: 100%;
+    box-sizing: border-box;
     background: white;
-    padding: 10px;
+    padding: 15px;
     border-top: 2px solid #ccc;
+    z-index: 1001;
+}
+
+#tableNo {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
 }
 
 button {
@@ -61,5 +84,21 @@ button {
     color: white;
     border: none;
     padding: 10px;
-    margin-top: 5px;
+    width: 100%;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
 }
+
+/* Buton Özelleştirmeleri */
+.add-btn {
+    background: #5a3e2b;
+    width: auto;
+}
+
+#sendOrderBtn {
+    background: #25D366; /* WhatsApp Yeşili */
+}
+
+/* Mobil için scrollbar gizle */
+.category-nav::-webkit-scrollbar { display: none; }
